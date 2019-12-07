@@ -3,6 +3,7 @@ package io.zipcoder.tc_spring_poll_application.controller;
 import io.zipcoder.tc_spring_poll_application.domain.Poll;
 import io.zipcoder.tc_spring_poll_application.repositories.PollRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ResourceNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -67,5 +68,5 @@ public class PollController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
+    public void verifyPoll(@PathVariable Long pollId) throws ResourceNotFoundException
 }
