@@ -1,9 +1,9 @@
 package io.zipcoder.tc_spring_poll_application.controller;
 
 import io.zipcoder.tc_spring_poll_application.domain.Poll;
+import io.zipcoder.tc_spring_poll_application.exception.ResourceNotFoundException;
 import io.zipcoder.tc_spring_poll_application.repositories.PollRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ResourceNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,14 +50,6 @@ public class PollController {
 
     @PutMapping("/polls/{pollId}")
     public ResponseEntity<?> updatePoll(@RequestBody Poll poll, @PathVariable Long pollId) {
-        poll = pollRepository.save(poll);
-        URI newPollUri = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(poll.getId())
-                .toUri();
-        HttpHeaders httpResult = new HttpHeaders();
-        httpResult.setLocation(newPollUri);
         Poll p = pollRepository.save(poll);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -68,5 +60,9 @@ public class PollController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    public void verifyPoll(@PathVariable Long pollId) throws ResourceNotFoundException
+    public void verifyPoll(Long pollId) {
+        if(!pollRepository.exists(pollId)){
+            throw new ResourceNotFoundException();
+        }
+    }
 }

@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Vote {
     @Id
     @GeneratedValue
-    @Column(name = "VOTE")
+    @Column(name = "VOTE_ID")
     Long id;
 
     @ManyToOne
