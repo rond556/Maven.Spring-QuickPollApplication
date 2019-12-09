@@ -1,5 +1,8 @@
 package io.zipcoder.tc_spring_poll_application.dto.error;
 
+import java.util.List;
+import java.util.Map;
+
 public class ErrorDetail {
 
 
@@ -8,6 +11,7 @@ public class ErrorDetail {
     String detail;
     Long timeStamp;
     String developerMessage;
+    Map<String, List<ValidationError>> errors;
 
     public String getTitle() {
         return title;
@@ -47,5 +51,12 @@ public class ErrorDetail {
 
     public void setDeveloperMessage(String developerMessage) {
         this.developerMessage = developerMessage;
+    }
+    public Map<String, List<ValidationError>> getErrors() {
+        return errors;
+    }
+
+    public void setErrors(Map<String, List<ValidationError>> errors) {
+        this.errors = errors;
     }
 }
