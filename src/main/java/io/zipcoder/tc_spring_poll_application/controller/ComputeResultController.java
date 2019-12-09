@@ -51,6 +51,7 @@ public class ComputeResultController {
         }
         voteResult.setTotalVotes(totalVotes);
         voteResult.setResults(optionCounts);
-        return new ResponseEntity<VoteResult>(voteResult, HttpStatus.OK);
+
+        return new ResponseEntity<>(voteResult, HttpStatus.OK);
     }
 }
